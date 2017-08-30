@@ -11,34 +11,32 @@ import javafx.stage.Stage;
  */
 public class myApplication extends Application {
 
-
     //setting up scene
     public void start(Stage stage){
 
         BorderPane root = new BorderPane();
 
+
+
         GridPane grid = new GridPane(); //grid filled with tiles;
 
-        HBox topBox = new HBox(); //UI elements at the top of the screen;
-        HBox botBox = new HBox(); // UI elements at the bottom of the scrren;
-        VBox leftBox = new VBox(); // Ui elements at the left of the screen;
-        VBox rightBox = new VBox(); // UI elements at the left of the scree;
 
-        root.setTop(topBox);
+        HBox botBox = new HBox(); // UI elements at the bottom of the scrren;
+
         root.setBottom(botBox);
-        root.setLeft(leftBox);
-        root.setRight(rightBox);
 
         Scene scene = new Scene(root, 200,200);
 
         root.setCenter(grid);
         stage.setScene(scene);
         stage.show();
+
+
     }
 
-    public static void main(String[] args){
-        launch(args);
-    }
+
+
+
 
 
 }

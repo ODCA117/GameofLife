@@ -1,0 +1,19 @@
+MyApplication - is the main class and contains all graphics
+
+Simulation - drives the simulation forward as long as the user wants it
+if the simulation should be on or not
+
+Board - Contains all available cells
+also contains the side size
+
+Tile - Describe a specific tile is a Rectangle
+
+
+Cell - Describes the cell as a living being
+Needs to be known
+if it will live next round or not
+what color it is
+which tile it is connected to
+
+Rules - has the rules to decide if a cell will be born, continue to live or die
+- calculation methods to decide if it will be alive or not

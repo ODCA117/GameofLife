@@ -1,5 +1,8 @@
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import java.util.List;
+import java.util.LinkedList;
+
 
 /**
  * Created by ol6803ax-s on 30/08/17.
@@ -55,7 +58,13 @@ public class Board {
     }
 
     public void executeNextBoard(){
-
+      for(int i = 0; i < side; i++){
+        for(int j = 0; j < side; j++){
+          if( willLive[i][j] != cells[i][j].isAlive()){
+            cells[i][j].changeStatus();
+          }
+        }
+      }
     }
 
     public void calculateNextBoard(){
@@ -69,15 +78,12 @@ public class Board {
 
     private List<Cell> getNeighbors(int y, int x) {
 
-      System.out.println(x + " x, " + y + " j,");
       LinkedList<Cell> neighbors = new LinkedList<>();
       for(int i = y-1; i < y+2; i++ ){
         for(int j = x-1; j < x+2; j++){
           if(i >= 0 && i < side && j >= 0 && j < side){
-
             if(i != y || j != x){
               neighbors.add(cells[i][j]);
-              System.out.println(i + " i, " + j + " j,");
             }
           }
         }

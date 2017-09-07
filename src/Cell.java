@@ -13,7 +13,6 @@ public class Cell {
 
     Cell(){
         alive = false;
-        aliveNextTurn = false;
         color = Color.WHITE;
         tile = new Tile();
         tile.changeColor(color);
@@ -22,9 +21,11 @@ public class Cell {
           @Override
           public void handle (MouseEvent event){
             if(isAlive()){
+              System.out.println("Kill cell");
               kill();
             }
             else {
+              System.out.println("revive cell");
               revive();
             }
           }
@@ -32,14 +33,20 @@ public class Cell {
     }
 
     public void changeStatus(){
-      
+      if(alive){
+        kill();
+      }
+      else{
+        revive();
+      }
+
     }
 
     public boolean isAlive(){
       return alive;
     }
 
-    private Tile getTile(){
+    public Tile getTile(){
       return tile;
     }
 

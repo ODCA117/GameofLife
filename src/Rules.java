@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * Created by ol6803ax-s on 31/08/17.
  */
@@ -30,11 +32,13 @@ public class Rules {
     }
 
     private int numberOfNeighbors(List<Cell> neighbors){
+
       int aliveNeighbors = 0;
-      for (int i;i < neighbors.size(); i++ ) {
-        if(neighbors.remove(0).isAlive){
+      for (int i = 0;i < neighbors.size(); i++ ) {
+        if(neighbors.remove(0).isAlive()){
           aliveNeighbors++;
         }
       }
+      return aliveNeighbors;
     }
 }

@@ -7,6 +7,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 
+
+
 /**
  * Created by ol6803ax-s on 30/08/17.
  *
@@ -35,10 +37,11 @@ public class MyApplication extends Application {
 
         stage.setScene(scene);
         stage.show();
+
+        simulation = new Simulation(board);
     }
 
     public static void main(String[] args) {
-        Simulation = new Simulation();
         launch(args);
     }
 
@@ -73,6 +76,7 @@ public class MyApplication extends Application {
         startSimulation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+              System.out.println("start Simulation");
               simulation.playSimulation();
             }
         });
@@ -80,6 +84,7 @@ public class MyApplication extends Application {
         stopSimulation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+              System.out.println("stopSimulation");
               simulation.stopSimulation();
             }
         });

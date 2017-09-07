@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class MyApplication extends Application {
 
     private Board board;
+    private Simulation simulation;
 
     //setting up scene
     public void start(Stage stage){
@@ -37,6 +38,7 @@ public class MyApplication extends Application {
     }
 
     public static void main(String[] args) {
+        Simulation = new Simulation();
         launch(args);
     }
 
@@ -71,14 +73,14 @@ public class MyApplication extends Application {
         startSimulation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+              simulation.playSimulation();
             }
         });
         Button stopSimulation = new Button("Stop Simulation");
         stopSimulation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+              simulation.stopSimulation();
             }
         });
 

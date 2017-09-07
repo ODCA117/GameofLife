@@ -1,22 +1,58 @@
 import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
 
 /**
  * Created by ol6803ax-s on 31/08/17.
  */
 public class Cell {
 
-    boolean willLive;
+    boolean alive;
     Color color;
     Tile tile;
 
-
-
-
     Cell(){
-        willLive = false;
-        color = Color.GREY;
+        alive = false;
+        aliveNextTurn = false;
+        color = Color.WHITE;
         tile = new Tile();
+        tile.changeColor(color);
 
+        tile.setOnMouseClicked( new EventHandler<MouseEvent>(){
+          @Override
+          public void handle (MouseEvent event){
+            if(isAlive()){
+              kill();
+            }
+            else {
+              revive();
+            }
+          }
+        });
     }
 
+    public void changeStatus(){
+      
+    }
+
+    public boolean isAlive(){
+      return alive;
+    }
+
+    private Tile getTile(){
+      return tile;
+    }
+
+
+    private void revive(){
+      alive = true;
+      color = Color.BLACK;
+      tile.changeColor(color);
+    }
+
+    private void kill(){
+      alive = false;
+      color = Color.WHITE;
+      tile.changeColor(color);
+    }
 }

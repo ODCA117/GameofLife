@@ -23,5 +23,5 @@ public class Tile extends Rectangle{
         return getHeight();
     }
 
-
+//some comments
 }

@@ -9,12 +9,20 @@ public class Simulation{
   }
 
   //plays all steps in the animation
-  public void playSimulation(){
+  public void playSimulation(int runs, int speed){
     on = true;
-    while(on){
+
+    for (int i = 0; i < runs; i++) {
       System.out.println("Running");
       board.calculateNextBoard();
       board.executeNextBoard();
+      try {
+        Thread.sleep(speed);
+
+      }
+      catch (InterruptedException e){
+        Thread.currentThread().interrupt();
+      }
     }
   }
 

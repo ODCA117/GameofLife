@@ -1,8 +1,11 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -72,12 +75,23 @@ public class MyApplication extends Application {
 
         HBox bottomUI = new HBox();
 
+        TextField tf = new TextField();
+        tf.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!newValue.matches("\\d*")){
+                    tf.setText(newValue.replaceAll("\\D+", ""));
+                }
+            }
+        });
+
         Button startSimulation = new Button("Start Simulation");
         startSimulation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
               System.out.println("start Simulation");
-              simulation.playSimulation();
+              int nbrOfRuns = getValues(tf.getText());
+              simulation.playSimulation(nbrOfRuns,500);
             }
         });
         Button stopSimulation = new Button("Stop Simulation");
@@ -89,9 +103,16 @@ public class MyApplication extends Application {
             }
         });
 
+
+
         bottomUI.setSpacing(10.0);
-        bottomUI.getChildren().addAll(startSimulation,stopSimulation);
+        bottomUI.getChildren().addAll(startSimulation,stopSimulation, tf);
 
         return bottomUI;
+    }
+
+    private int getValues(String string){
+        int i = Integer.parseInt(string);
+        return i;
     }
 }

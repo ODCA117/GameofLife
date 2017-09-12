@@ -8,6 +8,7 @@ public class Simulation{
 
   //plays all steps in the animation
   //Some more comments about playsimulation
+    //I think this will get in trouble
   public void playSimulation(int runs, int speed){
 
     for (int i = 0; i < runs; i++) {

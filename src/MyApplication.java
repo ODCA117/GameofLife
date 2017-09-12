@@ -95,7 +95,7 @@ public class MyApplication extends Application {
                 protected Void call() throws Exception {
                     int nbrRuns = getValues(nbrofRuns.getText());
 
-                    simulation.playSimulation(nbrRuns, 1000);
+                    simulation.playSimulation(nbrRuns, 200);
 
                     return null;
                 }

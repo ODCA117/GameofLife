@@ -1,8 +1,12 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -72,26 +76,54 @@ public class MyApplication extends Application {
 
         HBox bottomUI = new HBox();
 
+        TextField nbrofRuns = new TextField();
+        nbrofRuns.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(!newValue.matches("\\d*")){
+                    nbrofRuns.setText(newValue.replaceAll("\\D+", ""));
+                }
+            }
+        });
+
+
+
         Button startSimulation = new Button("Start Simulation");
-        startSimulation.setOnAction(new EventHandler<ActionEvent>() {
+        startSimulation.setOnAction( actionEvent -> {
+            Task<Void> task = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    int nbrRuns = getValues(nbrofRuns.getText());
+
+                    simulation.playSimulation(nbrRuns, 1000);
+
+                    return null;
+                }
+            };
+
+            new Thread(task).start();
+        } );
+
+        Button oneStep = new Button("One Step");
+        oneStep.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event) {
-              System.out.println("start Simulation");
-              simulation.playSimulation();
+            public void handle(ActionEvent actionEvent) {
+                //System.out.println("one Step");
+
+                simulation.playStep();
             }
         });
-        Button stopSimulation = new Button("Stop Simulation");
-        stopSimulation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-              System.out.println("stopSimulation");
-              simulation.stopSimulation();
-            }
-        });
+
+
 
         bottomUI.setSpacing(10.0);
-        bottomUI.getChildren().addAll(startSimulation,stopSimulation);
+        bottomUI.getChildren().addAll(startSimulation, oneStep, nbrofRuns);
 
         return bottomUI;
+    }
+
+    private int getValues(String string){
+        int i = Integer.parseInt(string);
+        return i;
     }
 }

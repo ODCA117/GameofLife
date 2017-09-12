@@ -1,3 +1,5 @@
+import javafx.scene.paint.Color;
+
 import java.util.List;
 
 /**
@@ -34,10 +36,11 @@ public class Rules {
     private int numberOfNeighbors(List<Cell> neighbors){
 
       int aliveNeighbors = 0;
-      for (int i = 0;i < neighbors.size(); i++ ) {
-        if(neighbors.remove(0).isAlive()){
-          aliveNeighbors++;
-        }
+      for (Cell c : neighbors){
+
+          if(c.isAlive()){
+              aliveNeighbors++;
+          }
       }
       return aliveNeighbors;
     }

@@ -20,6 +20,7 @@ public class Simulation{
     }
   }
 
+  //Some more comments on playstep
   public void playStep(){
     System.out.println("Running");
     board.calculateNextBoard();

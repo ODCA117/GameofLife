@@ -7,6 +7,7 @@ public class Simulation{
   }
 
   //plays all steps in the animation
+  //Some more comments about playsimulation
   public void playSimulation(int runs, int speed){
 
     for (int i = 0; i < runs; i++) {

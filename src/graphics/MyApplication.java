@@ -56,7 +56,7 @@ public class MyApplication extends Application {
 
         for( int i = 0; i < board.side(); i++) {
             for (int j = 0; j < board.side(); j++) {
-                grid.add(board.getTile(i, j), i, j); //GridPane have to have nodes that implements node
+                grid.add(board.getTile(i, j), i, j);
             }
         }
 

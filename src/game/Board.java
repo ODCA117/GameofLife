@@ -39,17 +39,6 @@ public class Board {
         return cell;
     }
 
-    /**
-     * returns tile on index x, y, indexed from 0
-     * @param x coordinate
-     * @return Graphics.Tile on (x,y)
-     * @param y coordinate
-     */
-    public Cell getCell(int x, int y){
-
-        return cells[x][y];
-    }
-
     public int side(){
         return side;
     }

@@ -3,23 +3,25 @@ package game;
 public class Simulation{
 
   private Board board;
+  private Boolean playing;
 
   public Simulation(Board board){
     this.board = board;
+    playing = false;
   }
 
   //plays all steps in the animation
-  public void playSimulation(int runs, int speed){
+  public void playSimulation(int speed){
+      playing = true;
+      while(playing){
+          playStep();
 
-    for (int i = 0; i < runs; i++) {
-        playStep();
-
-        try {
-            Thread.sleep(speed);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
+          try {
+              Thread.sleep(speed);
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+      }
   }
 
   public void playStep(){
@@ -27,5 +29,9 @@ public class Simulation{
     board.calculateNextBoard();
     board.executeNextBoard();
 
+  }
+
+  public void stopPlaying(){
+      playing = false;
   }
 }

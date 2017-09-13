@@ -1,3 +1,7 @@
+package graphics;
+
+import game.Board;
+import game.Simulation;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,9 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-
-
-
 
 /**
  * Created by ol6803ax-s on 30/08/17.
@@ -43,10 +44,6 @@ public class MyApplication extends Application {
         stage.show();
 
         simulation = new Simulation(board);
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 
     /**
@@ -86,7 +83,7 @@ public class MyApplication extends Application {
             }
         });
 
-        Button startSimulation = new Button("Start Simulation");
+        Button startSimulation = new Button("Start Game Simulation");
         startSimulation.setOnAction( actionEvent -> {
             Task<Void> task = new Task<Void>() {
                 @Override

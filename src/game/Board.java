@@ -1,7 +1,8 @@
-import javafx.event.EventHandler;
-import javafx.scene.input.MouseEvent;
+package game;
+
 import java.util.List;
 import java.util.LinkedList;
+import graphics.Tile;
 
 
 /**
@@ -41,7 +42,7 @@ public class Board {
     /**
      * returns tile on index x, y, indexed from 0
      * @param x coordinate
-     * @return Tile on (x,y)
+     * @return Graphics.Tile on (x,y)
      * @param y coordinate
      */
     public Cell getCell(int x, int y){

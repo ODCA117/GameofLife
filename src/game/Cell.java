@@ -1,6 +1,9 @@
+package game;
+
 import javafx.scene.paint.Color;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import graphics.Tile;
 
 /**
  * Created by ol6803ax-s on 31/08/17.

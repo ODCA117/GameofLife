@@ -1,8 +1,10 @@
+package game;
+
 public class Simulation{
 
   private Board board;
 
-  Simulation(Board board){
+  public Simulation(Board board){
     this.board = board;
   }
 

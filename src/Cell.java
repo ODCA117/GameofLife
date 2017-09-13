@@ -7,9 +7,9 @@ import javafx.event.EventHandler;
  */
 public class Cell {
 
-    boolean alive;
-    Color color;
-    Tile tile;
+    private boolean alive;
+    private Color color;
+    private Tile tile;
 
     Cell(){
         alive = false;

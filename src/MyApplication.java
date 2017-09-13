@@ -86,8 +86,6 @@ public class MyApplication extends Application {
             }
         });
 
-
-
         Button startSimulation = new Button("Start Simulation");
         startSimulation.setOnAction( actionEvent -> {
             Task<Void> task = new Task<Void>() {

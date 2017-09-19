@@ -2,29 +2,27 @@ package game;
 
 public class Simulation{
 
-  private Board board;
   private Boolean playing;
 
-  public Simulation(Board board){
-    this.board = board;
+  public Simulation(){
     playing = false;
   }
 
   //plays all steps in the animation
-  public void playSimulation(int speed){
+  public void playSimulation(Board board, int delay){
       playing = true;
       while(playing){
-          playStep();
 
+          playStep(board);
           try {
-              Thread.sleep(speed);
+              Thread.sleep(delay);
           } catch (InterruptedException e) {
               e.printStackTrace();
           }
       }
   }
 
-  public void playStep(){
+  private void playStep(Board board){
     System.out.println("Running");
     board.calculateNextBoard();
     board.executeNextBoard();

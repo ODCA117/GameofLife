@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>456</y>
+      <w>160</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Board
+Package::game
+--
+Cells[][]
+--
+-createCell()
++executeNextBoard()
++CalculateNextBoard()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>248</x>
+      <y>320</y>
+      <w>192</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>MainApplication
+--
+-Simulation
+-Board
+-Rules
+--
+PlaySimulation(int)
+StopSimulation()
+ChangeCellStatus(Cell)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>512</x>
+      <y>592</y>
+      <w>104</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>Cell
+Package::game
+--
+-alive
+-color
+-(tile)
+--
++changeStaus()
++isAlive()
++(getTile)
+-killl()
+-revive()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>296</x>
+      <y>456</y>
+      <w>136</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Rules
+Package::game
+--
+--
++CalculateNextStatus(Cell, List&lt;Cell&gt;)
+-NumberOfNeighbors(List&lt;Cell&gt;)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>56</x>
+      <y>456</y>
+      <w>216</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>Simulation
+Package::game
+--
+Boolean playing
+--
++playSimulation(Board, int delay)
++stopSimulation()
+-playStep(Board)
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>368</y>
+      <w>136</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>150.0;110.0;150.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>352</x>
+      <y>416</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>152</x>
+      <y>360</y>
+      <w>112</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;10.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>552</x>
+      <y>552</y>
+      <w>24</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>768</x>
+      <y>312</y>
+      <w>224</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>GameViewController
+Package::graphics
+--
+-MainApplication
+-Slider
+--
++setModel(MainApplication)
++initialize(URL, ResourceBundle)
+-start()
+-stop()
+-nextGeneration()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>752</x>
+      <y>592</y>
+      <w>144</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Tile
+Package::graphics
+--
+--
++changeColor(Color)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>432</x>
+      <y>344</y>
+      <w>352</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>420.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>952</x>
+      <y>608</y>
+      <w>152</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>TileBoard
+Package::graphics
+--
+Tiles[][]
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1056</x>
+      <y>496</y>
+      <w>80</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>TilePane
+--
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>984</x>
+      <y>512</y>
+      <w>128</w>
+      <h>112</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>140.0;10.0;140.0;80.0;10.0;80.0;10.0;120.0</additional_attributes>
+  </element>
+</diagram>

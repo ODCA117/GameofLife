@@ -21,9 +21,5 @@ public class Tile extends Rectangle{
         setFill(color);
     }
 
-    public double side(){
-        return getHeight();
-    }
-
 //some comments
 }

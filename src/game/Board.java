@@ -13,9 +13,8 @@ import graphics.Tile;
 public class Board {
 
     private Cell[][] cells;
-    private boolean[][] willLive;
-    private int side;
-    private Rules rules;
+    private boolean[][] willLive;// Flytta till Cell
+    private Rules rules; //Flytta till MainApplication
 
     /**
      * Create squareBoard whith side side
@@ -23,7 +22,6 @@ public class Board {
      */
     public Board (int side) {
         cells = new Cell[side][side];
-        this.side = side;
 
         for (int i = 0; i < side; i++){
             for(int j = 0; j < side; j++){
@@ -39,14 +37,13 @@ public class Board {
         return cell;
     }
 
-    public int side(){
-        return side;
-    }
+
 
     public Tile getTile(int x, int y){
       return cells[x][y].getTile();
     }
 
+    //Get side of board
     public void executeNextBoard(){
       for(int i = 0; i < side; i++){
         for(int j = 0; j < side; j++){

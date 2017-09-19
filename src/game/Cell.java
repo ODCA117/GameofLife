@@ -49,6 +49,7 @@ public class Cell {
       return alive;
     }
 
+    //Byta ut mot att istället ge en befintlig Tile som kan göra allt med cellen som behövs
     public Tile getTile(){
       return tile;
     }

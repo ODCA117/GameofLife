@@ -1,17 +1,17 @@
-package game;
+package graphics;
 
-import graphics.GameViewControl;
+import game.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.util.Observable;
+
 public class MainApplication extends Application{
 
-    Simulation simulation;
-    Board board;
-
+    GameController gameController;
 
     public static void main(String[] args)  {
         launch(args);
@@ -20,17 +20,13 @@ public class MainApplication extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-
-        simulation = new Simulation();
-        int side = 10;
-        board = new Board(side);
+        gameController = new GameController(10);
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("GameView.fxml"));
         BorderPane root = loader.load();
         GameViewControl gameViewControl = loader.getController();
         gameViewControl.setModel(this);
-
 
 
         Scene scene = new Scene(root);
@@ -40,11 +36,11 @@ public class MainApplication extends Application{
     }
 
     public void playSimulation(int delay){
-        simulation.playSimulation(board, delay);
+        gameController.playSimulation(delay);
     }
 
     public void stopSimulation(){
-        simulation.stopPlaying();
+        gameController.stopSimulation();
     }
 
     public void changeCellStatus(){

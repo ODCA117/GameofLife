@@ -35,6 +35,7 @@ public class Cell {
         });
     }
 
+
     public void changeStatus(){
       if(alive){
         kill();
@@ -47,11 +48,6 @@ public class Cell {
 
     public boolean isAlive(){
       return alive;
-    }
-
-    //Byta ut mot att istället ge en befintlig Tile som kan göra allt med cellen som behövs
-    public Tile getTile(){
-      return tile;
     }
 
 

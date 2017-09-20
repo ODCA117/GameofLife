@@ -21,5 +21,4 @@ public class Tile extends Rectangle{
         setFill(color);
     }
 
-//some comments
 }

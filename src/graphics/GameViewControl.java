@@ -1,6 +1,6 @@
 package graphics;
 
-import game.MainApplication;
+import game.GameController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;

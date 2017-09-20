@@ -1,15 +1,21 @@
 package game;
 
-public class Simulation{
+import java.util.Observable;
+
+public class Simulation extends Observable implements Runnable{
 
   private Boolean playing;
+  private Board board;
+  private int delay;
 
-  public Simulation(){
+  public Simulation(Board board, int delay){
     playing = false;
+    this.board = board;
+    this.delay = delay;
   }
 
   //plays all steps in the animation
-  public void playSimulation(Board board, int delay){
+  private void playSimulation(){
       playing = true;
       while(playing){
 
@@ -19,6 +25,9 @@ public class Simulation{
           } catch (InterruptedException e) {
               e.printStackTrace();
           }
+          setChanged();
+          notifyObservers();
+          clearChanged();
       }
   }
 
@@ -31,5 +40,11 @@ public class Simulation{
 
   public void stopPlaying(){
       playing = false;
+  }
+
+  @Override
+
+  public void run() {
+      playSimulation();
   }
 }

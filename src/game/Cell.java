@@ -12,27 +12,18 @@ public class Cell {
 
     private boolean alive;
     private Color color;
-    private Tile tile;
 
     Cell(){
         alive = false;
         color = Color.WHITE;
-        tile = new Tile();
-        tile.changeColor(color);
+    }
 
-        tile.setOnMouseClicked( new EventHandler<MouseEvent>(){
-          @Override
-          public void handle (MouseEvent event){
-            if(isAlive()){
-              System.out.println("Kill cell");
-              kill();
-            }
-            else {
-              System.out.println("revive cell");
-              revive();
-            }
-          }
-        });
+    public Color getColor(){
+        return new Color(
+                color.getRed(),
+                color.getGreen(),
+                color.getBlue(),
+                color.getOpacity());
     }
 
 
@@ -43,23 +34,19 @@ public class Cell {
       else{
         revive();
       }
-
     }
 
     public boolean isAlive(){
       return alive;
     }
 
-
     private void revive(){
       alive = true;
       color = Color.BLACK;
-      tile.changeColor(color);
     }
 
     private void kill(){
       alive = false;
       color = Color.WHITE;
-      tile.changeColor(color);
     }
 }

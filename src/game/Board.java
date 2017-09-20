@@ -2,7 +2,7 @@ package game;
 
 import java.util.List;
 import java.util.LinkedList;
-import graphics.Tile;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -37,16 +37,27 @@ public class Board {
         return cell;
     }
 
+    public Color[][] getCellColor(){
+        Color[][] cellColor = new Color[cells.length][cells.length];
 
+        for (int i = 0; i < cellColor.length; i++){
+            for(int j = 0; j < 0; j++){
+                cellColor[i][j] = cells[i][j].getColor();
+            }
+        }
 
-    public Tile getTile(int x, int y){
-      return cells[x][y].getTile();
+        return cellColor;
     }
 
-    //Get side of board
+    public void changeCellStatus(int x, int y){
+        cells[x][y].changeStatus();
+    }
+
+
+    //Flytta på så att graphics ej kommer åt detta
     public void executeNextBoard(){
-      for(int i = 0; i < side; i++){
-        for(int j = 0; j < side; j++){
+      for(int i = 0; i < cells.length; i++){
+        for(int j = 0; j < cells.length; j++){
           if( willLive[i][j] != cells[i][j].isAlive()){
             cells[i][j].changeStatus();
           }
@@ -54,9 +65,10 @@ public class Board {
       }
     }
 
+    //Flytta på så att graphics ej kommer åt detta
     public void calculateNextBoard(){
-      for(int i = 0; i < side; i++){
-        for(int j = 0; j < side; j++){
+      for(int i = 0; i < cells.length; i++){
+        for(int j = 0; j < cells.length; j++){
           List<Cell> neighbors = getNeighbors(i,j);
           willLive[i][j] = rules.calculateNextStatus(cells[i][j], neighbors);
         }
@@ -68,7 +80,7 @@ public class Board {
       LinkedList<Cell> neighbors = new LinkedList<>();
       for(int i = y-1; i < y+2; i++ ){
         for(int j = x-1; j < x+2; j++){
-          if(i >= 0 && i < side && j >= 0 && j < side){
+          if(i >= 0 && i < cells.length && j >= 0 && j < cells.length){
             if(i != y || j != x){
               neighbors.add(cells[i][j]);
             }

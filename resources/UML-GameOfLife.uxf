@@ -267,7 +267,10 @@ updateBoard()
       <w>80</w>
       <h>24</h>
     </coordinates>
-    <panel_attributes>Observer</panel_attributes>
+    <panel_attributes>Observer
+Package::graphics
+--
+--</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

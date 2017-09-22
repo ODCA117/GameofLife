@@ -1,69 +1,52 @@
 package graphics;
 
-
-import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 public class TileBoard{
-    private GridPane gridPane;
+
+    private Tile tiles[][];
     private int side;
+    private GridPane gridPane;
 
     public TileBoard(int side, MainApplication mainApplication){
         this.side = side;
-        gridPane = new GridPane();
-        Tile[][] tiles = createTileBoard(side, mainApplication);
-        for(int i = 0; i < side; i++){
-            for(int j = 0; j < side; j++){
-                gridPane.add(tiles[i][j], j, i);
-            }
-        }
-        gridPane.setGridLinesVisible(true);
-    }
+        tiles = new Tile[side][side];
 
-    private Tile[][] createTileBoard(int side, MainApplication mainApplication){
-
-        Tile[][] tiles = new Tile[side][side];
         for(int i = 0; i < side; i++){
             for(int j = 0; j < side; j++){
                 tiles[i][j] = new Tile();
                 final int x = i;
                 final int y = j;
-                tiles[i][j].setOnMouseClicked(e -> clicked(mainApplication,x,y));
+                tiles[x][y].setOnMouseClicked(e -> clicked(mainApplication, x, y));
             }
         }
-        return tiles;
     }
 
     private void clicked(MainApplication mainApplication, int x, int y){
         mainApplication.changeTile(x,y);
     }
 
-    public GridPane getGridPane(){
+    public GridPane getAsGridPane(){
+        if(gridPane == null) {
+
+            gridPane = new GridPane();
+            for (int i = 0; i < side; i++) {
+                for (int j = 0; j < side; j++) {
+                    gridPane.add(tiles[i][j], i, j);
+                }
+            }
+            gridPane.setGridLinesVisible(true);
+        }
+
         return gridPane;
     }
 
     public void updateTilecolors(Color[][] colors){
-        Tile[][] tiles = getGridPaneTiles();
         for(int i = 0; i < side; i++){
             for(int j = 0; j < side; j++){
                 tiles[i][j].changeColor(colors[i][j]);
             }
         }
     }
-
-    private Tile[][] getGridPaneTiles(){
-        Tile[][] nodes = new Tile[side][side];
-        for(Node n: gridPane.getChildren()){
-            if(n instanceof Tile){
-
-                int col = GridPane.getColumnIndex(n);
-                int row = GridPane.getRowIndex(n);
-                nodes[col][row] = (Tile)n;
-            }
-        }
-
-        return nodes;
-    }
-
 }

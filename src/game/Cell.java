@@ -1,9 +1,6 @@
 package game;
 
 import javafx.scene.paint.Color;
-import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
-import graphics.Tile;
 
 /**
  * Created by ol6803ax-s on 31/08/17.
@@ -19,11 +16,7 @@ public class Cell {
     }
 
     public Color getColor(){
-        return new Color(
-                color.getRed(),
-                color.getGreen(),
-                color.getBlue(),
-                color.getOpacity());
+        return color;
     }
 
 

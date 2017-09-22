@@ -18,7 +18,6 @@ public class Simulation extends Observable implements Runnable{
   private void playSimulation(){
       playing = true;
       while(playing){
-
           playStep(board);
           try {
               Thread.sleep(delay);
@@ -27,15 +26,12 @@ public class Simulation extends Observable implements Runnable{
           }
           setChanged();
           notifyObservers();
-          clearChanged();
       }
   }
 
   private void playStep(Board board){
-    System.out.println("Running");
     board.calculateNextBoard();
     board.executeNextBoard();
-
   }
 
   public void stopPlaying(){

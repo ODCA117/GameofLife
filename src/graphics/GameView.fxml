@@ -18,6 +18,7 @@
                </HBox.margin>
             </Label>
             <Slider fx:id="slider_speed" blockIncrement="50.0" majorTickUnit="50.0" max="1000.0" min="100.0" minorTickCount="100" prefHeight="16.0" prefWidth="100.0" rotate="180.0" value="1000.0" />
+            <Label id="LABEL_Running" fx:id="LABEL_Running" />
          </children>
          <padding>
             <Insets top="5.0" />

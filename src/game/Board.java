@@ -25,23 +25,18 @@ public class Board {
 
         for (int i = 0; i < side; i++){
             for(int j = 0; j < side; j++){
-                cells[i][j] = createCell();
+                cells[i][j] = new Cell();
             }
         }
         willLive = new boolean[side][side];
         rules = new Rules();
     }
 
-    private Cell createCell(){
-        Cell cell = new Cell();
-        return cell;
-    }
-
     public Color[][] getCellColor(){
         Color[][] cellColor = new Color[cells.length][cells.length];
 
         for (int i = 0; i < cellColor.length; i++){
-            for(int j = 0; j < 0; j++){
+            for(int j = 0; j < cellColor.length; j++){
                 cellColor[i][j] = cells[i][j].getColor();
             }
         }

@@ -14,16 +14,10 @@ public class Tile extends Rectangle{
 
     public Tile (){
         super(25,25);
-        setFill(Color.WHITE);
-        this.setOnMouseClicked(e -> clicked());
+        this.setFill(Color.WHITE);
     }
 
     public void changeColor(Color color){
-        setFill(color);
+        this.setFill(color);
     }
-
-    private void clicked(){
-
-    }
-
 }

@@ -40,7 +40,6 @@ public class GameController extends Observable implements Observer{
         board.changeCellStatus(x, y);
         setChanged();
         notifyObservers(board);
-        clearChanged();
     }
 
     @Override
@@ -48,6 +47,5 @@ public class GameController extends Observable implements Observer{
         System.out.println("GameController Notified about change");
         setChanged();
         notifyObservers(board);
-        clearChanged();
     }
 }

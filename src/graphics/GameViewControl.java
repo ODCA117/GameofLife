@@ -2,6 +2,7 @@ package graphics;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
 import java.net.URL;
@@ -13,6 +14,9 @@ public class GameViewControl implements Initializable {
 
     @FXML
     private Slider slider_speed;
+
+    @FXML
+    private Label LABEL_Running;
 
     public void setModel(MainApplication model) {
         this.model = model;
@@ -26,6 +30,7 @@ public class GameViewControl implements Initializable {
     @FXML
     private void start(){
         model.playSimulation((int) slider_speed.getValue());
+        LABEL_Running.setText("Running");
     }
 
     @FXML
@@ -35,6 +40,7 @@ public class GameViewControl implements Initializable {
     @FXML
     private void stop(){
         model.stopSimulation();
+        LABEL_Running.setText("");
     }
 
 

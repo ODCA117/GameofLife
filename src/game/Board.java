@@ -12,78 +12,91 @@ import javafx.scene.paint.Color;
  */
 public class Board {
 
-    private Cell[][] cells;
-    private boolean[][] willLive;// Flytta till Cell
+    private Cell[] cells;
+    private int side;
+    private boolean[] willLive;// Flytta till Cell
     private Rules rules; //Flytta till MainApplication
 
     /**
      * Create squareBoard whith side side
      * @param side side of the square board
      */
-    public Board (int side) {
-        cells = new Cell[side][side];
+    public Board (int side, Rules rules) {
+        this.side = side - 1;
+        this.rules = rules;
+        cells = new Cell[side * side];
 
-        for (int i = 0; i < side; i++){
-            for(int j = 0; j < side; j++){
-                cells[i][j] = new Cell();
-            }
+        for( Cell c : cells){
+            c = new Cell(rules);
         }
-        willLive = new boolean[side][side];
-        rules = new Rules();
+        willLive = new boolean[side * side];
+
     }
 
     public Color[][] getCellColor(){
-        Color[][] cellColor = new Color[cells.length][cells.length];
+        Color[][] cellColor = new Color[side][side];
 
-        for (int i = 0; i < cellColor.length; i++){
-            for(int j = 0; j < cellColor.length; j++){
-                cellColor[i][j] = cells[i][j].getColor();
-            }
+        for(int i = 0; i < cells.length; i++){
+            cellColor[i/side][i%side] = cells[i].getColor();
         }
 
         return cellColor;
     }
 
     public void changeCellStatus(int x, int y){
-        cells[x][y].changeStatus();
-    }
-
-
-    //Flytta på så att graphics ej kommer åt detta
-    public void executeNextBoard(){
-      for(int i = 0; i < cells.length; i++){
-        for(int j = 0; j < cells.length; j++){
-          if( willLive[i][j] != cells[i][j].isAlive()){
-            cells[i][j].changeStatus();
-          }
-        }
-      }
+        cells[(x * side) + y].changeStatus();
     }
 
     //Flytta på så att graphics ej kommer åt detta
-    public void calculateNextBoard(){
-      for(int i = 0; i < cells.length; i++){
-        for(int j = 0; j < cells.length; j++){
-          List<Cell> neighbors = getNeighbors(i,j);
-          willLive[i][j] = rules.calculateNextStatus(cells[i][j], neighbors);
+    void executeNextBoard(){
+        for(Cell c : cells){
+            if(c.isNextGen())
+                c.changeStatus();
         }
-      }
     }
 
-    private List<Cell> getNeighbors(int y, int x) {
+    //Flytta på så att graphics ej kommer åt detta
+     void calculateNextBoard(){
 
-      LinkedList<Cell> neighbors = new LinkedList<>();
-      for(int i = y-1; i < y+2; i++ ){
-        for(int j = x-1; j < x+2; j++){
-          if(i >= 0 && i < cells.length && j >= 0 && j < cells.length){
-            if(i != y || j != x){
-              neighbors.add(cells[i][j]);
-            }
-          }
+        for( Cell c : cells){
+            List<Cell> neighbors = getNeighbors(c);
+            c.calculateNextGen(neighbors);
         }
-      }
 
-      return neighbors;
+    }
 
+    //Gör om för endim
+    private List<Cell> getNeighbors(Cell c) {
+        int index = findIndex(c);
+        LinkedList<Cell> neighbors = new LinkedList<>();
+
+        for(int i = -1; i <= 1; i++){
+           for( int j = -1; j <= 1; j++){
+               int row = index/side + i;
+               int col = index%side + j;
+
+               if(row < 0 && row > side){
+
+               }
+               else if(col < 0 && col > side){
+
+               }
+
+               else if( cells[row + col].isAlive()){
+                   neighbors.add(cells[row + col]);
+               }
+           }
+
+        }
+
+        return neighbors;
+
+    }
+
+    private int findIndex(Cell c) {
+        for(int i=0; i<cells.length; i++)
+            if(cells[i] == c)
+                return i;
     }
 }
+

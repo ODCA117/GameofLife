@@ -10,12 +10,12 @@ public class GameController extends Observable implements Observer{
 
     Simulation simulation;
     Board board;
-    Rules rules;
+    Rules rules; // Eventuellt överflödig
 
 
     public GameController(int side){
-        board = new Board(side);
         rules = new Rules();
+        board = new Board(side, rules);
     }
 
     public void playSimulation(int delay){
@@ -44,7 +44,6 @@ public class GameController extends Observable implements Observer{
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("GameController Notified about change");
         setChanged();
         notifyObservers(board);
     }

@@ -2,6 +2,8 @@ package game;
 
 import java.util.List;
 import java.util.LinkedList;
+
+
 import javafx.scene.paint.Color;
 
 
@@ -22,32 +24,36 @@ public class Board {
      * @param side side of the square board
      */
     public Board (int side, Rules rules) {
-        this.side = side - 1;
+        this.side = side;
         this.rules = rules;
         cells = new Cell[side * side];
 
-        for( Cell c : cells){
-            c = new Cell(rules);
+        for( int i = 0; i < cells.length; i++)
+        {
+            cells[i] = new Cell(rules);
         }
-        willLive = new boolean[side * side];
 
+        willLive = new boolean[side * side];
     }
 
+    //create a 2-dim array with the collor on each cell
     public Color[][] getCellColor(){
         Color[][] cellColor = new Color[side][side];
 
         for(int i = 0; i < cells.length; i++){
             cellColor[i/side][i%side] = cells[i].getColor();
         }
-
         return cellColor;
     }
 
+    // change the cell status,
+    // kill if alive,
+    // revive if killed
     public void changeCellStatus(int x, int y){
         cells[(x * side) + y].changeStatus();
     }
 
-    //Flytta på så att graphics ej kommer åt detta
+    // Changes every cells status during simulation
     void executeNextBoard(){
         for(Cell c : cells){
             if(c.isNextGen())
@@ -55,7 +61,7 @@ public class Board {
         }
     }
 
-    //Flytta på så att graphics ej kommer åt detta
+    // Calculate the next board
      void calculateNextBoard(){
 
         for( Cell c : cells){
@@ -65,7 +71,7 @@ public class Board {
 
     }
 
-    //Gör om för endim
+    // Finds which neigboring cells are alive
     private List<Cell> getNeighbors(Cell c) {
         int index = findIndex(c);
         LinkedList<Cell> neighbors = new LinkedList<>();
@@ -75,7 +81,7 @@ public class Board {
                int row = index/side + i;
                int col = index%side + j;
 
-               if(row < 0 && row > side){
+               if(row > 0 && row > side){
 
                }
                else if(col < 0 && col > side){
@@ -93,10 +99,12 @@ public class Board {
 
     }
 
+    //fins the index of one cell in the array
     private int findIndex(Cell c) {
         for(int i=0; i<cells.length; i++)
             if(cells[i] == c)
                 return i;
+        return 0;
     }
 }
 

@@ -16,17 +16,19 @@ public class GameController extends Observable implements Observer{
     public GameController(int side){
         rules = new Rules();
         board = new Board(side, rules);
+        simulation = new Simulation(board);
+        simulation.addObserver(this);
     }
 
     public void playSimulation(int delay){
 
-        if(simulation == null) {
-            simulation = new Simulation(board, delay);
-            simulation.addObserver(this);
+        if(!simulation.isPlaying()) {
+            simulation.setSpeed(delay);
             new Thread(simulation).start();
             setChanged();
             notifyObservers();
         }
+
     }
 
     public void stopSimulation(){

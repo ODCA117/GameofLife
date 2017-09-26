@@ -6,12 +6,12 @@ public class Simulation extends Observable implements Runnable{
 
   private Boolean playing;
   private Board board;
-  private int delay;
+  private int speed;
 
-  public Simulation(Board board, int delay){
+  public Simulation(Board board){
     playing = false;
     this.board = board;
-    this.delay = delay;
+    speed = 100;
   }
 
   //plays all steps in the animation
@@ -20,7 +20,7 @@ public class Simulation extends Observable implements Runnable{
       while(playing){
           playStep(board);
           try {
-              Thread.sleep(delay);
+              Thread.sleep(speed);
           } catch (InterruptedException e) {
               e.printStackTrace();
           }
@@ -38,8 +38,15 @@ public class Simulation extends Observable implements Runnable{
       playing = false;
   }
 
-  @Override
+  public boolean isPlaying(){
+      return playing;
+  }
 
+  public void setSpeed(int speed){
+      this.speed = speed;
+  }
+
+  @Override
   public void run() {
       playSimulation();
   }

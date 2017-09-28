@@ -10,7 +10,7 @@ public class GameController extends Observable implements Observer{
 
     Simulation simulation;
     Board board;
-    Rules rules; // Eventuellt överflödig
+    Rules rules; //Eventuellt överflödig
 
 
     public GameController(int side){
@@ -32,9 +32,8 @@ public class GameController extends Observable implements Observer{
     }
 
     public void stopSimulation(){
-        if(simulation != null) {
+        if(simulation.isPlaying()) {
             simulation.stopPlaying();
-            simulation = null;
         }
     }
 

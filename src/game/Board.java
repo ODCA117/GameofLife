@@ -16,6 +16,8 @@ public class Board {
 
     private Cell[] cells;
     private int side;
+    private int height;
+    private int width;
     private boolean[] willLive;// Flytta till Cell
     private Rules rules; //Flytta till MainApplication
 
@@ -73,27 +75,27 @@ public class Board {
 
     // Finds which neigboring cells are alive
     private List<Cell> getNeighbors(Cell c) {
-        int index = findIndex(c);
+        int i = findIndex(c);
         LinkedList<Cell> neighbors = new LinkedList<>();
 
-        for(int i = -1; i <= 1; i++){
-           for( int j = -1; j <= 1; j++){
-               int row = index/side + i;
-               int col = index%side + j;
+        int size = cells.length;
+        width = side;
+        height = side;
 
-               if(row > 0 && row > side){
-
-               }
-               else if(col < 0 && col > side){
-
-               }
-
-               else if( cells[row + col].isAlive()){
-                   neighbors.add(cells[row + col]);
-               }
-           }
-
+        //To the left
+        if(i % width != 0){
+            neighbors.add(cells[i - 1]);
         }
+
+        //To the right
+        if(i % width != width - 1){
+            neighbors.add(cells[i + 1]);
+        }
+
+        if(i % width != 0){
+            neighbors.add(cells[i - 1]);
+        }
+
 
         return neighbors;
 

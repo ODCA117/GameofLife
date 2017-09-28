@@ -39,6 +39,7 @@ public class Cell {
     public boolean isNextGen(){
         return nextGen;
     }
+
     public void calculateNextGen(List<Cell> neighbors){
         nextGen = rules.calculateNextStatus(this, neighbors);
     }

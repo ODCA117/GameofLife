@@ -2,8 +2,6 @@ package game;
 
 import java.util.List;
 import java.util.LinkedList;
-
-
 import javafx.scene.paint.Color;
 
 
@@ -43,7 +41,7 @@ public class Board {
         Color[][] cellColor = new Color[side][side];
 
         for(int i = 0; i < cells.length; i++){
-            cellColor[i/side][i%side] = cells[i].getColor();
+            cellColor[i / side][i % side] = cells[i].getColor();
         }
         return cellColor;
     }
@@ -70,7 +68,6 @@ public class Board {
             List<Cell> neighbors = getNeighbors(c);
             c.calculateNextGen(neighbors);
         }
-
     }
 
     // Finds which neigboring cells are alive
@@ -96,14 +93,13 @@ public class Board {
             neighbors.add(cells[i - 1]);
         }
 
-
         return neighbors;
 
     }
 
     //fins the index of one cell in the array
     private int findIndex(Cell c) {
-        for(int i=0; i<cells.length; i++)
+        for(int i = 0; i < cells.length; i++)
             if(cells[i] == c)
                 return i;
         return 0;

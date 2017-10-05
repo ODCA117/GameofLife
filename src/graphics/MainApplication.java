@@ -15,18 +15,20 @@ public class MainApplication extends Application implements Observer{
 
     private GameController gameController;
     private TileBoard tileBoard;
+    private int height;
+    private int width; //Kan flyttas till argument
 
-    public static void main(String[] args)  {
-        launch(args);
+    public MainApplication (int height, int width){
+        this.height = height;
+        this.width = width;
+        launch(new String[0]);
     }
-
     @Override
     public void start(Stage stage) throws Exception {
 
-        int size = 10;
-        gameController = new GameController(size);
+        gameController = new GameController(height, width);
         gameController.addObserver(this);
-        tileBoard = new TileBoard(size, this);
+        tileBoard = new TileBoard(height, width, this);
 
         //kanske skicka över till en annan metod
         FXMLLoader loader = new FXMLLoader();

@@ -9,9 +9,9 @@ public class Simulation extends Observable implements Runnable{
   private int speed;
 
   public Simulation(Board board){
-    playing = false;
-    this.board = board;
-    speed = 100;
+        playing = false;
+        this.board = board;
+        speed = 100;
   }
 
   //plays all steps in the animation
@@ -19,19 +19,20 @@ public class Simulation extends Observable implements Runnable{
       playing = true;
       while(playing){
           playStep(board);
+          setChanged();
+          notifyObservers();
           try {
               Thread.sleep(speed);
           } catch (InterruptedException e) {
               e.printStackTrace();
           }
-          setChanged();
-          notifyObservers();
+
       }
   }
 
   private void playStep(Board board){
-    board.calculateNextBoard();
-    board.executeNextBoard();
+        board.calculateNextBoard();
+        board.executeNextBoard();
   }
 
   public void stopPlaying(){

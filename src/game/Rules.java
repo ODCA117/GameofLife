@@ -12,7 +12,9 @@ public class Rules {
     }
 //other comments
     public boolean calculateNextStatus(Cell cell, List<Cell> neighbors){
-      int aliveNeighbors = numberOfNeighbors(neighbors);
+        int aliveNeighbors = numberOfAliveNeighbors(neighbors);
+
+        System.out.println(cell + " has: " + aliveNeighbors);
 
       if (aliveNeighbors < 2 && cell.isAlive()){
         return false;
@@ -33,13 +35,14 @@ public class Rules {
       }
     }
 
-    private int numberOfNeighbors(List<Cell> neighbors){
+    private int numberOfAliveNeighbors(List<Cell> neighbors){
 
       int aliveNeighbors = 0;
       for (Cell c : neighbors){
 
           if(c.isAlive()){
               aliveNeighbors++;
+              System.out.println(c);
           }
       }
       return aliveNeighbors;

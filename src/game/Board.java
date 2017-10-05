@@ -1,7 +1,10 @@
 package game;
 
+import java.sql.SQLOutput;
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Map;
 import javafx.scene.paint.Color;
 
 
@@ -13,35 +16,38 @@ import javafx.scene.paint.Color;
 public class Board {
 
     private Cell[] cells;
-    private int side;
     private int height;
     private int width;
-    private boolean[] willLive;// Flytta till Cell
-    private Rules rules; //Flytta till MainApplication
+    private Map<Cell, List<Cell>> cellNeighbors;
 
     /**
      * Create squareBoard whith side side
      * @param side side of the square board
      */
-    public Board (int side, Rules rules) {
-        this.side = side;
-        this.rules = rules;
-        cells = new Cell[side * side];
+    public Board (int height, int width, Rules rules) {
+        this.height = height;
+        this.width = width;
+        cells = new Cell[height * width];
 
         for( int i = 0; i < cells.length; i++)
         {
-            cells[i] = new Cell(rules);
+            cells[i] = new Cell(rules, "(" + i/height + "," + i%width + ")");
         }
 
-        willLive = new boolean[side * side];
+        cellNeighbors = new HashMap<>();
+
+        for (Cell c : cells){
+            List<Cell> neighbors = getNeighbors(c);
+            cellNeighbors.put(c, neighbors);
+        }
     }
 
-    //create a 2-dim array with the collor on each cell
+    //create a 2-dim array with the color on each cell
     public Color[][] getCellColor(){
-        Color[][] cellColor = new Color[side][side];
+        Color[][] cellColor = new Color[height][width];
 
         for(int i = 0; i < cells.length; i++){
-            cellColor[i / side][i % side] = cells[i].getColor();
+            cellColor[i / height][i % width] = cells[i].getColor();
         }
         return cellColor;
     }
@@ -50,23 +56,22 @@ public class Board {
     // kill if alive,
     // revive if killed
     public void changeCellStatus(int x, int y){
-        cells[(x * side) + y].changeStatus();
+        cells[(x * height) + y].changeStatus();
+
+        System.out.println(cells[(x * height) + y] + " changed");
     }
 
     // Changes every cells status during simulation
     void executeNextBoard(){
         for(Cell c : cells){
-            if(c.isNextGen())
-                c.changeStatus();
+            c.nextGen();
         }
     }
 
     // Calculate the next board
      void calculateNextBoard(){
-
         for( Cell c : cells){
-            List<Cell> neighbors = getNeighbors(c);
-            c.calculateNextGen(neighbors);
+            c.calculateNextGen(cellNeighbors.get(c));
         }
     }
 
@@ -74,23 +79,46 @@ public class Board {
     private List<Cell> getNeighbors(Cell c) {
         int i = findIndex(c);
         LinkedList<Cell> neighbors = new LinkedList<>();
-
         int size = cells.length;
-        width = side;
-        height = side;
 
-        //To the left
+        //left Neighbor
         if(i % width != 0){
             neighbors.add(cells[i - 1]);
         }
 
-        //To the right
-        if(i % width != width - 1){
+        //right neighbor
+        if((i + 1) % width != 0){
             neighbors.add(cells[i + 1]);
         }
 
-        if(i % width != 0){
-            neighbors.add(cells[i - 1]);
+        //over Neighbor
+        if(i - width >= 0){
+            neighbors.add(cells[i - width]);
+        }
+
+        //under Neighbor
+        if (i + width < size){
+            neighbors.add(cells[i + width]);
+        }
+
+        //Left top Neighbor
+        if (i % width != 0 && i - width - 1 >= 0){
+            neighbors.add(cells[i - width - 1]);
+        }
+
+        //Rigt top neighbor
+        if ((i + 1) % width != 0 && i - width + 1 >= 0){
+            neighbors.add(cells[i - width + 1]);
+        }
+
+        //left bot Neighbor
+        if(i % width != 0 && i + width - 1 < size){
+            neighbors.add(cells[i + width - 1]);
+        }
+
+        //Right bot neighbor
+        if (( i + 1) % width != 0 && i + width + 1 < size){
+            neighbors.add(cells[i + width + 1]);
         }
 
         return neighbors;

@@ -8,14 +8,12 @@ import java.util.Observer;
  */
 public class GameController extends Observable implements Observer{
 
-    Simulation simulation;
-    Board board;
-    Rules rules; //Eventuellt överflödig
+    private Simulation simulation;
+    private Board board;
 
 
-    public GameController(int side){
-        rules = new Rules();
-        board = new Board(side, rules);
+    public GameController(int height, int width){
+        board = new Board(height, width, new Rules());
         simulation = new Simulation(board);
         simulation.addObserver(this);
     }
@@ -24,11 +22,12 @@ public class GameController extends Observable implements Observer{
 
         if(!simulation.isPlaying()) {
             simulation.setSpeed(delay);
-            new Thread(simulation).start();
+            Thread simThread = new Thread(simulation);
+            simThread.setDaemon(true);
+            simThread.start();
             setChanged();
             notifyObservers();
         }
-
     }
 
     public void stopSimulation(){

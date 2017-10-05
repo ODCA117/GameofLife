@@ -13,12 +13,14 @@ public class Cell {
     private boolean nextGen;
     private Color color;
     private Rules rules;
+    private String name;
 
-    Cell  (Rules rules){
+    Cell  (Rules rules, String name){
         alive = false;
         color = Color.WHITE;
         nextGen = false;
         this.rules = rules;
+        this.name = name;
 
     }
 
@@ -36,16 +38,27 @@ public class Cell {
       }
     }
 
-    public boolean isNextGen(){
-        return nextGen;
-    }
-
     public void calculateNextGen(List<Cell> neighbors){
         nextGen = rules.calculateNextStatus(this, neighbors);
     }
 
     public boolean isAlive(){
       return alive;
+    }
+
+    public void nextGen(){
+        if(nextGen){
+            revive();
+        }
+
+        else{
+            kill();
+        }
+    }
+
+    @Override
+    public String toString () {
+        return name;
     }
 
     private void revive(){
@@ -57,4 +70,5 @@ public class Cell {
       alive = false;
       color = Color.WHITE;
     }
+
 }

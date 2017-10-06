@@ -28,4 +28,10 @@
          </BorderPane.margin>
       </HBox>
    </bottom>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>

@@ -1,9 +1,9 @@
 package graphics;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.stage.Stage;
 
 public class StartController {
 
@@ -23,12 +23,16 @@ public class StartController {
     private void UpdateSliderLabel(){
         lbl_Heigth_Value.setText(Double.toString(Math.round(slider_Height.getValue())));
         lbl_Width_Value.setText(Double.toString(Math.round(slider_Width.getValue())));
-
     }
 
     @FXML
     private void start(){
-        new MainApplication((int) slider_Height.getValue(), (int) slider_Width.getValue());
+        MainApplication ma = new MainApplication();
+        try {
+            ma.start(new Stage(), (int) Math.round(slider_Width.getValue()), (int) Math.round(slider_Height.getValue()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

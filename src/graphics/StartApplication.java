@@ -10,9 +10,8 @@ public class StartApplication extends Application{
 
     StartController sc;
 
-
     public static void main(String[] args){
-        launch(args);
+        launch();
     }
 
     @Override

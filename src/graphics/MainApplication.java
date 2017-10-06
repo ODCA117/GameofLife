@@ -2,7 +2,6 @@ package graphics;
 
 import game.Board;
 import game.GameController;
-import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,20 +10,13 @@ import javafx.stage.Stage;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MainApplication extends Application implements Observer{
+public class MainApplication implements Observer{
 
     private GameController gameController;
     private TileBoard tileBoard;
-    private int height;
-    private int width; //Kan flyttas till argument
 
-    public MainApplication (int height, int width){
-        this.height = height;
-        this.width = width;
-        launch(new String[0]);
-    }
-    @Override
-    public void start(Stage stage) throws Exception {
+
+    public void start(Stage stage, int height, int width) throws Exception {
 
         gameController = new GameController(height, width);
         gameController.addObserver(this);
